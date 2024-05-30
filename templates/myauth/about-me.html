@@ -1,0 +1,50 @@
+{% extends 'myauth/base.html' %}
+{% load cache %}
+
+ {% block title %}
+    User # {{ user.pk}}
+ {% endblock %}
+
+
+{% block body %}
+   <h1>User # {{ user.pk}} info</h1>
+        {% cache 300 userinfo user.username %}
+          <h2>Detail</h2>
+          <p>Username: {{ user.username }}</p>
+          <p>First name: {{ user.first_name }}</p>
+          <p>Last name: {{ user.last_name }}</p>
+          <p>Email: {{ user.email }}</p>
+          <p>Bio: {{ user.profile.bio }}</p>
+        {% endcache %}
+        <h3>Avatar:</h3>
+        <div>
+           {% if user.profile.image %}
+           <img src="{{ user.profile.image.url }}" alt="{{ user.profile.image.name }}">
+           {% else %}
+             <p>Avatar is not load</p>
+           {% endif %}
+        </div>
+        <div>
+            <a href="{% url 'myauth:user_update' pk=user.pk %}">Update user data</a>
+        </div>
+        <div>
+            <a href="{% url 'myauth:users_list' %}">Back to users list</a>
+        </div>
+{% endblock %}
+
+<!--   {% if user.is_authenticated %}-->
+<!--   {% else %}-->
+<!--      <h2>User is anonymous</h2>-->
+<!--   {% endif %}-->
+
+<!--         <div>-->
+<!--           <form method="post" enctype="multipart/form-data">-->
+<!--            {% csrf_token %}-->
+<!--            <p>-->
+<!--              <label for="id_avatar">Avatar</label>-->
+<!--              <input name="avatar" required id="id_avatar" type="file">-->
+<!--            </p>-->
+
+<!--            <button type="submit">Create (update) avatar</button>-->
+<!--           </form>-->
+<!--         </div>-->

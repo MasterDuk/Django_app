@@ -1,0 +1,28 @@
+{% extends 'requestapp/base.html' %}
+
+ {% block title %}
+    File upload
+ {% endblock %}
+
+
+{% block body %}
+   <h1>File upload</h1>
+
+   <div>
+       <form method="post" enctype="multipart/form-data">
+           {% csrf_token %}
+<!--      <p>
+             <input name="myfile" type="file">
+          </p>-->
+           {{ form.as_p }}
+           <button type="submit">
+              Upload
+           </button>
+       </form>
+       <div>
+         <pre>
+           {{ result }}
+         </pre>
+       </div>
+   </div>
+{% endblock %}

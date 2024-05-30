@@ -1,0 +1,11 @@
+{% extends 'requestapp/base.html' %}
+
+ {% block title %}
+    Error request
+ {% endblock %}
+
+
+{% block body %}
+   <h1>Ошибка. Повторный  запрос с вашего ip-адреса: {{ result }} можно сделать через 10 секунд</h1>
+
+{% endblock %}
